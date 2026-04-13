@@ -8,155 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0f0f;
-    --surface: #181818;
-    --surface2: #222222;
-    --border: #2a2a2a;
-    --accent: #c8f75e;
-    --accent2: #5ec8f7;
-    --accent3: #f75e8f;
-    --text: #f0ede6;
-    --muted: #888;
-    --font-head: 'Syne', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --bg: #0f0f0f; --surface: #181818; --surface2: #222222; --border: #2a2a2a;
+    --accent: #c8f75e; --accent2: #5ec8f7; --accent3: #f75e8f;
+    --text: #f0ede6; --muted: #888;
+    --font-head: 'Syne', sans-serif; --font-mono: 'DM Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-mono); font-size: 14px; line-height: 1.6; min-height: 100vh; }
 
-  /* HEADER */
-  header {
-    padding: 3rem 2rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-    border-bottom: 1px solid var(--border);
-  }
-  .header-tag {
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-  h1 {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 1rem;
-  }
+  header { padding: 2.5rem 2rem 1.5rem; max-width: 900px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  .header-tag { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; font-weight: 500; }
+  h1 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
   h1 span { color: var(--accent); }
-  .header-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 1.25rem;
-  }
-  .meta-pill {
-    font-size: 11px;
-    padding: 4px 12px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
+  .header-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .meta-pill { font-size: 11px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); letter-spacing: 0.05em; }
 
-  /* WEEK STRIP */
-  .week-strip {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1.5rem 2rem 0;
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0,1fr));
-    gap: 6px;
-  }
-  .day-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 4px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    color: var(--text);
-    font-family: var(--font-mono);
-  }
+  .streak-bar { max-width: 900px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .streak-item { display: flex; align-items: center; gap: 8px; }
+  .streak-num { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .streak-lbl { font-size: 11px; color: var(--muted); line-height: 1.3; }
+  .streak-sep { width: 1px; height: 32px; background: var(--border); }
+
+  .week-strip { max-width: 900px; margin: 0 auto; padding: 1.25rem 2rem 0; display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 6px; }
+  .day-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 4px 6px; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; color: var(--text); font-family: var(--font-mono); position: relative; }
   .day-btn:hover { border-color: #444; background: var(--surface2); }
   .day-btn.active { border-color: var(--accent); background: var(--surface2); }
   .day-btn.active .day-short { color: var(--accent); }
-  .day-short { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.05em; }
-  .day-icon { font-size: 18px; margin-bottom: 4px; display: block; }
+  .day-btn.done { border-color: #2a4a0a; background: #0d1a05; }
+  .day-btn.done .day-short { color: var(--accent); }
+  .done-dot { position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: none; }
+  .day-btn.done .done-dot { display: block; }
+  .day-short { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 3px; letter-spacing: 0.05em; }
+  .day-icon { font-size: 16px; margin-bottom: 3px; display: block; }
   .day-type { font-size: 9px; color: var(--muted); line-height: 1.3; }
 
-  /* MAIN CONTENT */
-  .content {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
-  }
+  .content { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
 
-  /* TABS */
-  .tabs {
-    display: flex;
-    gap: 0;
-    margin: 1.5rem 0 1.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 8px 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--muted);
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    margin-bottom: -1px;
-    transition: color 0.15s, border-color 0.15s;
-  }
+  .tabs { display: flex; margin: 1.25rem 0; border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 8px 14px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); cursor: pointer; letter-spacing: 0.05em; margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
   .tab-btn:hover { color: var(--text); }
   .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-  /* PANEL */
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* DAY HEADER */
-  .day-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 1.25rem;
-  }
-  .day-title {
-    font-family: var(--font-head);
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  .day-badge {
-    font-size: 10px;
-    font-weight: 500;
-    padding: 4px 12px;
-    border-radius: 999px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    margin-top: 4px;
-  }
+  .day-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 1rem; }
+  .day-title { font-family: var(--font-head); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -0.02em; }
+  .day-badge { font-size: 10px; font-weight: 500; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; margin-top: 4px; }
   .badge-upper { background: #1e1a3a; color: #9d8ff7; border: 1px solid #3c3270; }
   .badge-legs { background: #3a1a1a; color: #f7756a; border: 1px solid #6b2e2e; }
   .badge-badminton { background: #1a2e1a; color: #7bcf7b; border: 1px solid #2e5a2e; }
@@ -164,138 +62,96 @@
   .badge-athletic { background: #0a2035; color: #5ec8f7; border: 1px solid #1a4a6e; }
   .badge-rest { background: #1a1a1a; color: var(--muted); border: 1px solid var(--border); }
 
-  /* DURATION BAR */
-  .dur-wrap { margin-bottom: 1.25rem; }
-  .dur-bar { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 6px; }
-  .dur-seg { height: 100%; }
-  .dur-legend { display: flex; gap: 14px; flex-wrap: wrap; }
-  .dur-label { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
-  .dur-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .done-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-family: var(--font-mono); font-size: 12px; color: var(--muted); cursor: pointer; transition: all 0.15s; margin-bottom: 1rem; width: 100%; justify-content: center; letter-spacing: 0.04em; }
+  .done-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .done-btn.is-done { background: #0d1a05; border-color: var(--accent); color: var(--accent); }
+  .done-chk { width: 16px; height: 16px; border-radius: 4px; border: 1px solid currentColor; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
 
-  /* WARM/COOL */
-  .wc-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 1rem;
-  }
+  .dur-wrap { margin-bottom: 1rem; }
+  .dur-bar { display: flex; gap: 2px; height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
+  .dur-seg { height: 100%; }
+  .dur-legend { display: flex; gap: 12px; flex-wrap: wrap; }
+  .dur-label { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .dur-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+
+  .wc-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 0.75rem; }
   .wc-block strong { color: var(--accent); font-weight: 500; }
 
-  /* SECTION */
-  .sec-label {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 1.4rem 0 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .sec-label { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.2rem 0 0.5rem; display: flex; align-items: center; gap: 8px; }
   .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* EXERCISE ROWS */
-  .ex-row {
-    display: flex;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: flex-start;
-  }
+  .ex-row { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
   .ex-row:last-child { border-bottom: none; }
-  .ex-n {
-    min-width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    background: var(--surface2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--muted);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .ex-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .ex-n { min-width: 22px; height: 22px; border-radius: 4px; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--muted); flex-shrink: 0; margin-top: 2px; }
+  .ex-body { flex: 1; min-width: 0; }
+  .ex-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
   .ex-detail { font-size: 12px; color: var(--muted); line-height: 1.55; }
-  .ex-prog {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: 11px;
-    color: var(--accent2);
-    background: #0a1e2e;
-    border: 1px solid #1a3a52;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
+  .ex-prog { display: inline-block; margin-top: 4px; font-size: 11px; color: var(--accent2); background: #0a1e2e; border: 1px solid #1a3a52; padding: 2px 7px; border-radius: 4px; }
+  .ex-links { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .yt-link { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #ff7070; background: #200a0a; border: 1px solid #3a1414; padding: 3px 8px; border-radius: 4px; text-decoration: none; transition: background 0.15s; }
+  .yt-link:hover { background: #2e0f0f; border-color: #5a2020; }
+  .yt-icon { width: 10px; height: 10px; fill: #ff7070; flex-shrink: 0; }
 
-  /* PROGRESSION */
-  .prog-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-  }
-  .prog-phase {
-    font-family: var(--font-head);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
+  .notes-area { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-family: var(--font-mono); font-size: 12px; color: var(--text); resize: vertical; min-height: 72px; margin-top: 0.5rem; }
+  .notes-area:focus { outline: none; border-color: #444; }
+  .notes-area::placeholder { color: #444; }
+  .notes-save { margin-top: 6px; padding: 6px 16px; background: none; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; }
+  .notes-save:hover { border-color: var(--accent); color: var(--accent); }
+  .notes-saved-msg { color: var(--accent); font-size: 11px; margin-left: 10px; opacity: 0; transition: opacity 0.3s; }
+
+  .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .cal-nav { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 5px 14px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .cal-nav:hover { border-color: #444; color: var(--text); }
+  .cal-month-lbl { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; }
+  .cal-dow { font-size: 10px; color: var(--muted); text-align: center; padding: 4px 0 8px; letter-spacing: 0.05em; }
+  .cal-day { aspect-ratio: 1; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; color: var(--muted); gap: 2px; }
+  .cal-day.empty { background: none; border-color: transparent; }
+  .cal-day.today { border-color: #555; color: var(--text); }
+  .cal-day.has-workout { color: var(--muted); }
+  .cal-day.completed { background: #0d1a05; border-color: #2a4a0a; color: var(--accent); }
+  .cal-day-num { font-size: 12px; line-height: 1; }
+  .cal-day-dot { width: 4px; height: 4px; border-radius: 50%; }
+  .cal-day.completed .cal-day-dot { background: var(--accent); }
+  .cal-day.has-workout:not(.completed) .cal-day-dot { background: #3a3a3a; }
+  .cal-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+  .cal-leg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .cal-leg-dot { width: 10px; height: 10px; border-radius: 3px; border: 1px solid; }
+  .cal-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 1.25rem; }
+  .cal-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+  .cal-stat-n { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .cal-stat-l { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .cal-log-title { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.2rem 0 0.6rem; display: flex; align-items: center; gap: 8px; }
+  .cal-log-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .log-entry { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .log-entry:last-child { border-bottom: none; }
+  .log-date { color: var(--muted); font-size: 11px; min-width: 95px; flex-shrink: 0; }
+  .log-day { color: var(--text); flex: 1; font-size: 13px; }
+  .log-note { font-size: 11px; color: var(--muted); font-style: italic; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-del { background: none; border: none; color: #3a3a3a; cursor: pointer; font-size: 13px; padding: 0 4px; transition: color 0.15s; flex-shrink: 0; }
+  .log-del:hover { color: var(--accent3); }
+  .empty-cal { margin-top: 1rem; font-size: 13px; color: var(--muted); }
+
+  .prog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+  .prog-phase { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 5px; }
   .prog-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
-  /* NUTRITION */
-  .nut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-  .nut-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .nut-title { font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-  .nut-val { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-  /* INFO BOX */
-  .info-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-top: 1rem;
-  }
+  .nut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .nut-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .nut-title { font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .nut-val { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .info-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent2); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--muted); line-height: 1.65; margin-top: 1rem; }
   .info-box strong { color: var(--text); font-weight: 500; }
 
-  /* EDIT NOTE */
-  .edit-note {
-    max-width: 900px;
-    margin: 0 auto 0;
-    padding: 0 2rem 1rem;
-  }
-  .edit-note p {
-    font-size: 11px;
-    color: #444;
-    text-align: center;
-    letter-spacing: 0.04em;
-  }
-  .edit-note a { color: #555; }
+  .edit-note { max-width: 900px; margin: 0 auto; padding: 0 2rem 1.5rem; }
+  .edit-note p { font-size: 11px; color: #3a3a3a; text-align: center; }
+  .edit-note a { color: #4a4a4a; }
 
   @media (max-width: 600px) {
-    header, .content, .week-strip, .edit-note { padding-left: 1rem; padding-right: 1rem; }
+    header, .content, .week-strip, .streak-bar, .edit-note { padding-left: 1rem; padding-right: 1rem; }
     .day-type { display: none; }
-    .day-icon { font-size: 14px; }
-    .nut-grid { grid-template-columns: 1fr; }
+    .nut-grid { grid-template-columns: 1fr 1fr; }
+    .log-note { display: none; }
   }
 </style>
 </head>
@@ -308,298 +164,405 @@
     <span class="meta-pill">Age 36</span>
     <span class="meta-pill">Strength + Calisthenics + Badminton</span>
     <span class="meta-pill">60–75 min sessions</span>
-    <span class="meta-pill">Intermediate level</span>
   </div>
 </header>
 
+<div class="streak-bar" id="streakBar"></div>
 <div class="week-strip" id="weekStrip"></div>
 
 <div class="content">
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('workout', this)">Workout</button>
-    <button class="tab-btn" onclick="switchTab('progression', this)">4–8 week plan</button>
-    <button class="tab-btn" onclick="switchTab('nutrition', this)">Nutrition</button>
+    <button class="tab-btn active" onclick="switchTab('workout',this)">Workout</button>
+    <button class="tab-btn" onclick="switchTab('calendar',this)">Calendar</button>
+    <button class="tab-btn" onclick="switchTab('progression',this)">4–8 week plan</button>
+    <button class="tab-btn" onclick="switchTab('nutrition',this)">Nutrition</button>
   </div>
-
-  <div class="panel active" id="panel-workout">
-    <div id="workoutDetail"></div>
-  </div>
-  <div class="panel" id="panel-progression">
-    <div id="progDetail"></div>
-  </div>
-  <div class="panel" id="panel-nutrition">
-    <div id="nutDetail"></div>
-  </div>
+  <div class="panel active" id="panel-workout"><div id="workoutDetail"></div></div>
+  <div class="panel" id="panel-calendar"><div id="calDetail"></div></div>
+  <div class="panel" id="panel-progression"><div id="progDetail"></div></div>
+  <div class="panel" id="panel-nutrition"><div id="nutDetail"></div></div>
 </div>
 
-<div class="edit-note">
-  <p>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a> &mdash; edit <code>workout.html</code> to update any exercise, set, or rep.</p>
-</div>
+<div class="edit-note"><p>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a> — edit <code>workout.html</code> to update any exercise, set, or rep.</p></div>
 
 <script>
 const days = [
   {
     short:"Mon", label:"Monday", icon:"💪", type:"Upper + Muscle-up",
-    badge:"badge-upper", badgeLabel:"Upper body",
-    duration:"70 min",
+    badge:"badge-upper", badgeLabel:"Upper body", duration:"70 min",
     segs:[{l:"Warm-up",m:10,c:"#5DCAA5"},{l:"Main",m:50,c:"#AFA9EC"},{l:"Cool-down",m:10,c:"#5DCAA5"}],
     warmup:"5 min shoulder circles, arm swings, band pull-aparts. 3 min scapular retractions on bar (3×10). 2 min wrist mobility.",
     cooldown:"Chest opener, lat stretch, doorway pec stretch, shoulder cross-body stretch. 5 min total.",
     sections:[
       {title:"Muscle-up progression", exs:[
-        {n:"Dead hang scapular pull-ups", d:"3 sets × 10 reps — full hang, depress scapulae only", p:"Wk 5+: add 2–3 slow eccentric pull-ups after each set"},
-        {n:"Explosive pull-ups (chin-up grip)", d:"4 sets × 6 reps — pull as explosively as possible to chest height", p:"Wk 5+: aim chest-to-bar; Wk 7+: attempt muscle-up transitions"},
-        {n:"Banded muscle-up transitions", d:"3 sets × 5 reps — resistance band under hips at the bar", p:"Wk 5+: reduce band; Wk 7+: attempt unassisted muscle-up"},
-        {n:"Ring or bar dips", d:"4 sets × 8–10 reps — full ROM, upright torso", p:"Wk 5+: 3-sec negative; Wk 7+: weighted +5 kg"},
+        {n:"Dead hang scapular pull-ups",d:"3 sets × 10 reps — full hang, depress scapulae only",p:"Wk 5+: add 2–3 slow eccentric pull-ups after each set",yt:[{l:"Scapular pull-ups",u:"https://www.youtube.com/results?search_query=scapular+pull+ups+tutorial"},{l:"Why they matter",u:"https://www.youtube.com/results?search_query=scapular+retraction+bar+calisthenics"}]},
+        {n:"Explosive pull-ups (chin-up grip)",d:"4 sets × 6 reps — pull as explosively as possible to chest height",p:"Wk 5+: chest-to-bar; Wk 7+: muscle-up transition",yt:[{l:"Explosive pull-up form",u:"https://www.youtube.com/results?search_query=explosive+pull+up+tutorial"},{l:"Chest-to-bar progression",u:"https://www.youtube.com/results?search_query=chest+to+bar+pull+up+progression"}]},
+        {n:"Banded muscle-up transitions",d:"3 sets × 5 reps — resistance band under hips at the bar",p:"Wk 5+: reduce band tension; Wk 7+: attempt unassisted",yt:[{l:"Muscle-up tutorial",u:"https://www.youtube.com/results?search_query=muscle+up+tutorial+beginner"},{l:"Banded muscle-up drill",u:"https://www.youtube.com/results?search_query=banded+muscle+up+progression+drill"}]},
+        {n:"Ring or bar dips",d:"4 sets × 8–10 reps — full ROM, upright torso",p:"Wk 5+: 3-sec negative; Wk 7+: weighted +5 kg",yt:[{l:"Bar dip form",u:"https://www.youtube.com/results?search_query=bar+dips+proper+form+tutorial"}]},
       ]},
       {title:"Horizontal push / pull superset", exs:[
-        {n:"Barbell bench press", d:"4 sets × 6–8 reps — compound strength", p:"Add 2.5 kg when you hit 8 clean reps across all 4 sets"},
-        {n:"Barbell bent-over rows", d:"4 sets × 8 reps — superset with bench, 90 sec rest after pair", p:"Mirror bench progression"},
+        {n:"Barbell bench press",d:"4 sets × 6–8 reps — compound strength",p:"Add 2.5 kg when 8 clean reps × 4 sets",yt:[{l:"Bench press technique",u:"https://www.youtube.com/results?search_query=barbell+bench+press+technique+form"}]},
+        {n:"Barbell bent-over rows",d:"4 sets × 8 reps — superset with bench, 90 sec rest",p:"Mirror bench progression",yt:[{l:"Bent-over row form",u:"https://www.youtube.com/results?search_query=barbell+bent+over+row+form"}]},
       ]},
       {title:"Accessory", exs:[
-        {n:"Pike push-ups", d:"3 sets × 10 reps — overhead strength builder", p:"Wk 5+: replace with seated DB press 4×8"},
-        {n:"Face pulls (band or cable)", d:"3 sets × 15 reps — rear delt and rotator cuff health", p:"Increase band resistance each month"},
+        {n:"Pike push-ups",d:"3 sets × 10 reps — overhead strength builder",p:"Wk 5+: replace with seated DB press 4×8",yt:[{l:"Pike push-up tutorial",u:"https://www.youtube.com/results?search_query=pike+push+up+tutorial"}]},
+        {n:"Face pulls (band or cable)",d:"3 sets × 15 reps — rear delt and rotator cuff health",p:"Increase band resistance each month",yt:[{l:"Face pulls tutorial",u:"https://www.youtube.com/results?search_query=face+pulls+tutorial+band"}]},
       ]},
     ]
   },
   {
     short:"Tue", label:"Tuesday", icon:"🦵", type:"Legs + Power",
-    badge:"badge-legs", badgeLabel:"Lower body",
-    duration:"70 min",
+    badge:"badge-legs", badgeLabel:"Lower body", duration:"70 min",
     segs:[{l:"Warm-up",m:10,c:"#5DCAA5"},{l:"Main",m:50,c:"#F0997B"},{l:"Cool-down",m:10,c:"#5DCAA5"}],
     warmup:"5 min leg swings (front/back + lateral), hip circles, bodyweight squats ×15, glute bridges ×20, calf raises ×20.",
     cooldown:"Quad stretch, pigeon pose, hamstring stretch, kneeling hip flexor stretch. 5–8 min.",
     sections:[
       {title:"Explosive power — badminton specific", exs:[
-        {n:"Box jumps", d:"4 sets × 6 reps — step down, full reset each rep", p:"Wk 5+: increase box height or add depth jump variation"},
-        {n:"Lateral bounds (skater jumps)", d:"3 sets × 10 each side — mimic lunge-and-return court movement", p:"Wk 5+: add 3-sec hold on landing leg"},
-        {n:"Jump squats", d:"3 sets × 8 reps — touch floor, explode up", p:"Wk 5+: add 5 kg vest"},
+        {n:"Box jumps",d:"4 sets × 6 reps — step down, full reset each rep",p:"Wk 5+: increase box height or depth jump variation",yt:[{l:"Box jump tutorial",u:"https://www.youtube.com/results?search_query=box+jump+tutorial+form"},{l:"Depth jump drill",u:"https://www.youtube.com/results?search_query=depth+jump+plyometric+tutorial"}]},
+        {n:"Lateral bounds (skater jumps)",d:"3 sets × 10 each side — mimic lunge-and-return court movement",p:"Wk 5+: add 3-sec hold on landing",yt:[{l:"Skater jumps tutorial",u:"https://www.youtube.com/results?search_query=skater+jumps+lateral+bounds+tutorial"}]},
+        {n:"Jump squats",d:"3 sets × 8 reps — touch floor, explode up",p:"Wk 5+: add 5 kg vest",yt:[{l:"Jump squat form",u:"https://www.youtube.com/results?search_query=jump+squat+form+tutorial"}]},
       ]},
       {title:"Strength compound", exs:[
-        {n:"Barbell back squat", d:"4 sets × 6–8 reps — below parallel", p:"Add 5 kg every 2 weeks when form is solid"},
-        {n:"Romanian deadlift (RDL)", d:"3 sets × 10 reps — feel full hamstring stretch at bottom", p:"Add 5 kg every 2–3 weeks"},
-        {n:"Bulgarian split squat", d:"3 sets × 10 each leg — rear foot elevated", p:"Wk 5+: add DBs 10–15 kg each hand"},
+        {n:"Barbell back squat",d:"4 sets × 6–8 reps — below parallel",p:"Add 5 kg every 2 weeks when form is solid",yt:[{l:"Squat form guide",u:"https://www.youtube.com/results?search_query=barbell+back+squat+form+tutorial"},{l:"Common squat mistakes",u:"https://www.youtube.com/results?search_query=squat+common+mistakes+fix"}]},
+        {n:"Romanian deadlift (RDL)",d:"3 sets × 10 reps — full hamstring stretch at bottom",p:"Add 5 kg every 2–3 weeks",yt:[{l:"RDL tutorial",u:"https://www.youtube.com/results?search_query=romanian+deadlift+tutorial+form"}]},
+        {n:"Bulgarian split squat",d:"3 sets × 10 each leg — rear foot elevated",p:"Wk 5+: add DBs 10–15 kg each",yt:[{l:"Bulgarian split squat",u:"https://www.youtube.com/results?search_query=bulgarian+split+squat+tutorial"}]},
       ]},
       {title:"Calf & stability", exs:[
-        {n:"Single-leg calf raises", d:"3 sets × 15 each side — on edge of step", p:"Wk 5+: add 10 kg dumbbell"},
-        {n:"Copenhagen plank", d:"3 sets × 20–30 sec each side — groin and adductor strength", p:"Wk 5+: add 10 hip dips per set"},
+        {n:"Single-leg calf raises",d:"3 sets × 15 each side — on edge of step",p:"Wk 5+: add 10 kg dumbbell",yt:[{l:"Calf raise technique",u:"https://www.youtube.com/results?search_query=single+leg+calf+raise+form"}]},
+        {n:"Copenhagen plank",d:"3 sets × 20–30 sec each side — groin and adductor strength",p:"Wk 5+: add 10 hip dips",yt:[{l:"Copenhagen plank",u:"https://www.youtube.com/results?search_query=copenhagen+plank+tutorial"}]},
       ]},
     ]
   },
   {
     short:"Wed", label:"Wednesday", icon:"🏸", type:"Badminton (fixed)",
-    badge:"badge-badminton", badgeLabel:"Badminton",
-    duration:"75 min",
+    badge:"badge-badminton", badgeLabel:"Badminton", duration:"75 min",
     segs:[{l:"Warm-up",m:12,c:"#5DCAA5"},{l:"Footwork",m:15,c:"#97C459"},{l:"Match play",m:38,c:"#3B6D11"},{l:"Cool-down",m:10,c:"#5DCAA5"}],
     warmup:"5 min jog + dynamic stretches. Shadow footwork all 6 corners × 3 sets × 1 min. Wrist circles, shoulder rotations, ankle mobilisation.",
     cooldown:"Light shadow footwork, static stretches: hip flexors, calves, shoulders, wrist extensors. 8–10 min.",
     sections:[
       {title:"Pre-game footwork drills — 15 min", exs:[
-        {n:"6-point shadow footwork", d:"4 rounds × 45 sec on / 15 sec off — all 6 court corners", p:"Wk 5+: 60 sec on / 10 sec off"},
-        {n:"T-drill agility shuttle", d:"5 rounds × 30 sec — side shuffles + forward sprint between imaginary points", p:"Track time, aim to cut 0.5 sec per month"},
-        {n:"Split-step reaction drill", d:"3 rounds × 45 sec — partner or wall feed, react and move to position", p:"Wk 5+: increase shuttle count and feed speed"},
+        {n:"6-point shadow footwork",d:"4 rounds × 45 sec on / 15 sec off — all 6 court corners",p:"Wk 5+: 60 sec on / 10 sec off",yt:[{l:"6-point shadow footwork",u:"https://www.youtube.com/results?search_query=badminton+shadow+footwork+6+corners"},{l:"Badminton footwork basics",u:"https://www.youtube.com/results?search_query=badminton+footwork+tutorial"}]},
+        {n:"T-drill agility shuttle",d:"5 rounds × 30 sec — side shuffles + forward sprint between points",p:"Track time; cut 0.5 sec per month",yt:[{l:"T-drill tutorial",u:"https://www.youtube.com/results?search_query=t+drill+agility+tutorial"}]},
+        {n:"Split-step reaction drill",d:"3 rounds × 45 sec — react and move to position on feed",p:"Wk 5+: increase feed speed",yt:[{l:"Split step technique",u:"https://www.youtube.com/results?search_query=badminton+split+step+tutorial"}]},
       ]},
       {title:"Match / structured play — 35–40 min", exs:[
-        {n:"Interval game sets", d:"3–4 × 7-min sets with 3 min active rest between — moderate to high intensity", p:"Wk 5+: 4 × 9 min; add net duel drills"},
-        {n:"Multi-shuttle feeding drill", d:"2 × 2 min — coach/partner feeds rapid shuttles across court", p:"Wk 5+: 3 × 2 min; randomise feed direction"},
+        {n:"Interval game sets",d:"3–4 × 7-min sets with 3 min active rest between — moderate to high intensity",p:"Wk 5+: 4 × 9 min; add net duel drills",yt:[{l:"Badminton match strategy",u:"https://www.youtube.com/results?search_query=badminton+singles+strategy"}]},
+        {n:"Multi-shuttle feeding drill",d:"2 × 2 min — partner feeds rapid shuttles across court",p:"Wk 5+: 3 × 2 min; randomise feed direction",yt:[{l:"Multi-shuttle drill",u:"https://www.youtube.com/results?search_query=badminton+multi+shuttle+drill"}]},
       ]},
       {title:"Conditioning finisher — 5 min", exs:[
-        {n:"Court sprints: baseline to net × 8", d:"2 rounds — active recovery walk between rounds", p:"Wk 5+: add crosscourt diagonal sprints; track HR recovery time"},
+        {n:"Court sprints: baseline to net × 8",d:"2 rounds — active recovery walk between rounds",p:"Wk 5+: add crosscourt diagonal sprints",yt:[{l:"Court conditioning",u:"https://www.youtube.com/results?search_query=badminton+court+fitness+conditioning"}]},
       ]},
     ]
   },
   {
     short:"Thu", label:"Thursday", icon:"🔥", type:"Core & Abs",
-    badge:"badge-core", badgeLabel:"Core & Abs",
-    duration:"65 min",
+    badge:"badge-core", badgeLabel:"Core & Abs", duration:"65 min",
     segs:[{l:"Warm-up",m:8,c:"#5DCAA5"},{l:"Main",m:47,c:"#EF9F27"},{l:"Cool-down",m:10,c:"#5DCAA5"}],
     warmup:"Cat-cow ×15, thoracic rotations ×10 each side, dead bug ×10 slow reps, hollow body hold 20 sec × 2.",
     cooldown:"Cobra stretch, child's pose, supine twist, kneeling hip flexor stretch. 8–10 min.",
     sections:[
       {title:"Anti-rotation & stability", exs:[
-        {n:"Dead bug", d:"4 sets × 10 slow reps each side — lower back pressed flat into floor throughout", p:"Wk 5+: add 2 kg ankle weights or dumbbell held overhead"},
-        {n:"Hollow body hold → rock", d:"3 sets × 30 sec hold + 10 rocks — full body tension throughout", p:"Wk 5+: tuck to full extension; Wk 7+: add 2 kg plate"},
-        {n:"Pallof press (band)", d:"3 sets × 12 each side — anti-rotation core strength", p:"Wk 5+: heavier band; wider stance"},
+        {n:"Dead bug",d:"4 sets × 10 slow reps each side — lower back flat into floor throughout",p:"Wk 5+: add 2 kg ankle weights or dumbbell overhead",yt:[{l:"Dead bug tutorial",u:"https://www.youtube.com/results?search_query=dead+bug+exercise+core+tutorial"}]},
+        {n:"Hollow body hold → rock",d:"3 sets × 30 sec hold + 10 rocks — full body tension",p:"Wk 5+: tuck to full extension; Wk 7+: 2 kg plate",yt:[{l:"Hollow body tutorial",u:"https://www.youtube.com/results?search_query=hollow+body+hold+tutorial"}]},
+        {n:"Pallof press (band)",d:"3 sets × 12 each side — anti-rotation core strength",p:"Wk 5+: heavier band; wider stance",yt:[{l:"Pallof press tutorial",u:"https://www.youtube.com/results?search_query=pallof+press+tutorial"}]},
       ]},
       {title:"Flexion & rotation — abs visibility", exs:[
-        {n:"Hanging knee raises → leg raises", d:"4 sets × 10–15 — fully control the lowering phase", p:"Wk 5+: straight leg raises; Wk 7+: toes-to-bar"},
-        {n:"Cable / band woodchops", d:"3 sets × 12 each side — rotational power and oblique definition", p:"Wk 5+: increase resistance; add deceleration pause at end"},
-        {n:"Decline sit-ups", d:"3 sets × 15 reps — controlled 3-sec negative", p:"Wk 5+: hold 5 kg plate at chest"},
-        {n:"Ab wheel rollouts", d:"3 sets × 8–12 reps from knees — hips and back neutral throughout", p:"Wk 7+: extend range of motion; attempt standing rollout"},
+        {n:"Hanging knee raises → leg raises",d:"4 sets × 10–15 — fully control the lowering phase",p:"Wk 5+: straight leg raises; Wk 7+: toes-to-bar",yt:[{l:"Hanging leg raise form",u:"https://www.youtube.com/results?search_query=hanging+leg+raise+tutorial"},{l:"Toes to bar progression",u:"https://www.youtube.com/results?search_query=toes+to+bar+progression"}]},
+        {n:"Cable / band woodchops",d:"3 sets × 12 each side — rotational power and oblique definition",p:"Wk 5+: increase resistance; add deceleration pause",yt:[{l:"Woodchop tutorial",u:"https://www.youtube.com/results?search_query=cable+woodchop+exercise+tutorial"}]},
+        {n:"Decline sit-ups",d:"3 sets × 15 reps — controlled 3-sec negative",p:"Wk 5+: hold 5 kg plate at chest",yt:[{l:"Decline sit-up form",u:"https://www.youtube.com/results?search_query=decline+sit+up+form+tutorial"}]},
+        {n:"Ab wheel rollouts",d:"3 sets × 8–12 reps from knees — hips and back neutral",p:"Wk 7+: attempt standing rollout",yt:[{l:"Ab wheel tutorial",u:"https://www.youtube.com/results?search_query=ab+wheel+rollout+tutorial"}]},
       ]},
       {title:"Plank finisher circuit — 2 rounds", exs:[
-        {n:"Plank → side plank → RKC plank", d:"30 sec each position × 2 rounds — no rest within each round", p:"Wk 5+: 45 sec each; add plank shoulder taps between positions"},
+        {n:"Plank → side plank → RKC plank",d:"30 sec each position × 2 rounds — no rest within round",p:"Wk 5+: 45 sec each; add shoulder taps",yt:[{l:"RKC plank tutorial",u:"https://www.youtube.com/results?search_query=RKC+plank+tutorial"},{l:"Side plank variations",u:"https://www.youtube.com/results?search_query=side+plank+variations+tutorial"}]},
       ]},
     ]
   },
   {
     short:"Fri", label:"Friday", icon:"⚡", type:"Athletic — no equipment",
-    badge:"badge-athletic", badgeLabel:"Athletic & Agility",
-    duration:"70 min",
+    badge:"badge-athletic", badgeLabel:"Athletic & Agility", duration:"70 min",
     segs:[{l:"Warm-up",m:10,c:"#5DCAA5"},{l:"Main",m:50,c:"#85B7EB"},{l:"Cool-down",m:10,c:"#5DCAA5"}],
-    warmup:"3 min easy jog on the spot or stair march. Arm circles, hip circles, leg swings ×10. High knees ×30 sec, butt kicks ×30 sec, inchworm ×5. Finish with 2 × 20 sec shadow badminton footwork at relaxed pace.",
-    cooldown:"Full body stretch — lats, hip flexors, hamstrings, calves, shoulders, thoracic. 5 min slow march. Optional foam roll quads and IT band.",
+    warmup:"3 min jog on the spot. Arm circles, hip circles, leg swings ×10. High knees ×30 sec, butt kicks ×30 sec, inchworm ×5. 2 × 20 sec shadow badminton footwork.",
+    cooldown:"Full body stretch — lats, hip flexors, hamstrings, calves, shoulders, thoracic. 5 min slow march. Optional foam roll.",
     sections:[
       {title:"Agility & speed — no equipment", exs:[
-        {n:"4-corner floor tap drill", d:"4 rounds × 30 sec on / 20 sec off — imagine a 1 m square on the floor, tap each corner in sequence as fast as possible from centre", p:"Wk 5+: randomise corner sequence; Wk 7+: add a jump to centre between each tap"},
-        {n:"Lateral shuffle bursts", d:"4 rounds × 30 sec on / 20 sec off — low athletic stance, 3 steps left, plant and explode back. Use a wall or sofa as a soft boundary if helpful", p:"Wk 5+: 5 shuffle steps each way; Wk 7+: add squat touch at each end"},
-        {n:"5-10-5 shadow sprint", d:"5 rounds, 30 sec rest between — sprint forward 5 large steps, plant hard, sprint back 10 steps, plant, forward 5 steps. Uses mental markers only, no cones needed", p:"Wk 5+: track time and aim to cut 0.3 sec; Wk 7+: add a low floor touch at each turn"},
+        {n:"4-corner floor tap drill",d:"4 rounds × 30 sec on / 20 sec off — imagine a 1 m square on the floor, tap each corner in sequence as fast as possible from centre",p:"Wk 5+: randomise sequence; Wk 7+: jump to centre between taps",yt:[{l:"Floor reaction agility drills",u:"https://www.youtube.com/results?search_query=floor+reaction+agility+drill+no+equipment"}]},
+        {n:"Lateral shuffle bursts",d:"4 rounds × 30 sec on / 20 sec off — low athletic stance, 3 steps left, plant and explode back",p:"Wk 5+: 5 shuffle steps; Wk 7+: add squat touch at each end",yt:[{l:"Lateral shuffle drill",u:"https://www.youtube.com/results?search_query=lateral+shuffle+agility+drill"}]},
+        {n:"5-10-5 shadow sprint",d:"5 rounds, 30 sec rest — sprint 5 steps forward, plant, back 10 steps, plant, forward 5. No cones needed",p:"Wk 5+: track time; Wk 7+: add floor touch at each turn",yt:[{l:"5-10-5 drill",u:"https://www.youtube.com/results?search_query=5+10+5+agility+drill+tutorial"}]},
       ]},
       {title:"Compound athletic lifts", exs:[
-        {n:"Trap bar / barbell deadlift", d:"4 sets × 5 reps — heavy, 2 min rest between sets", p:"Add 5 kg when you complete 5×5 with clean form"},
-        {n:"Push press (barbell)", d:"3 sets × 6 reps — leg drive into overhead power, 90 sec rest", p:"Wk 5+: add 2.5 kg; focus on timing of leg drive"},
-        {n:"Dumbbell farmer carry", d:"3 sets × 30 m — grip strength, core bracing, upright posture", p:"Wk 5+: +5 kg; Wk 7+: single-arm carry for anti-lateral flexion"},
+        {n:"Trap bar / barbell deadlift",d:"4 sets × 5 reps — heavy, 2 min rest",p:"Add 5 kg when you hit 5×5 cleanly",yt:[{l:"Deadlift form",u:"https://www.youtube.com/results?search_query=deadlift+form+tutorial"}]},
+        {n:"Push press (barbell)",d:"3 sets × 6 reps — leg drive into overhead power, 90 sec rest",p:"Wk 5+: add 2.5 kg",yt:[{l:"Push press tutorial",u:"https://www.youtube.com/results?search_query=push+press+barbell+tutorial"}]},
+        {n:"Dumbbell farmer carry",d:"3 sets × 30 m — grip strength, core bracing, upright posture",p:"Wk 5+: +5 kg; Wk 7+: single-arm carry",yt:[{l:"Farmer carry tutorial",u:"https://www.youtube.com/results?search_query=farmer+carry+tutorial"}]},
       ]},
       {title:"HIIT conditioning finisher — 10 min", exs:[
-        {n:"Squat jump → lateral shuffle → sprawl", d:"4 rounds × 30 sec on / 30 sec off — 2 squat jumps, 4 shuffle steps, drop to sprawl (chest near floor), stand and repeat. Mimics rally burst + recovery", p:"Wk 5+: 40 sec on / 20 sec off; Wk 7+: explosive clap push-up on the sprawl"},
-        {n:"Split lunge jumps", d:"4 sets × 10 reps — explosive alternating lunge jumps, land softly, 45 sec rest. Directly replicates lunge-and-recover in badminton", p:"Wk 5+: brief pause on landing for single-leg stability; Wk 7+: add 5 kg vest"},
+        {n:"Squat jump → lateral shuffle → sprawl",d:"4 rounds × 30 sec on / 30 sec off — 2 squat jumps, 4 shuffle steps, sprawl to floor, stand and repeat",p:"Wk 5+: 40 sec on / 20 sec off; Wk 7+: clap push-up on sprawl",yt:[{l:"Sprawl conditioning drill",u:"https://www.youtube.com/results?search_query=sprawl+conditioning+drill"}]},
+        {n:"Split lunge jumps",d:"4 sets × 10 reps — explosive alternating lunge jumps, land softly, 45 sec rest",p:"Wk 5+: pause on landing; Wk 7+: 5 kg vest",yt:[{l:"Jump lunge tutorial",u:"https://www.youtube.com/results?search_query=split+jump+lunge+tutorial"}]},
       ]},
     ]
   },
   {
     short:"Sat", label:"Saturday", icon:"🧘", type:"Active recovery",
-    badge:"badge-rest", badgeLabel:"Recovery",
-    duration:"30–45 min",
-    segs:[{l:"Mobility",m:20,c:"#444"},{l:"Walk / swim",m:20,c:"#333"}],
+    badge:"badge-rest", badgeLabel:"Recovery", duration:"30–45 min",
+    segs:[{l:"Mobility",m:20,c:"#444"},{l:"Walk/swim",m:20,c:"#333"}],
     warmup:"No structured warm-up. Move gently at your own pace.",
     cooldown:"5 min breathing practice — box breathing or diaphragmatic breathing.",
     sections:[
       {title:"Active recovery — choose 1 or 2", exs:[
-        {n:"30–45 min easy walk or swim", d:"Zone 1–2 heart rate only — conversational pace, no pushing", p:"Maintain year-round; increase to 60 min if energy allows"},
-        {n:"Full body mobility flow", d:"10 min — hip 90/90, shoulder CARs, thoracic rotation, ankle circles", p:"Add new patterns as you identify tight areas over time"},
-        {n:"Foam rolling", d:"10 min — IT band, thoracic spine, calves, lats", p:"Add targeted areas after hard training weeks"},
-        {n:"Optional light footwork shadow", d:"20 min badminton shadow only — no racket, very low intensity", p:"Skip entirely if fatigued; recovery is the goal today"},
+        {n:"30–45 min easy walk or swim",d:"Zone 1–2 heart rate — conversational pace only",p:"Increase to 60 min if energy allows",yt:[]},
+        {n:"Full body mobility flow",d:"10 min — hip 90/90, shoulder CARs, thoracic rotation, ankle circles",p:"Add patterns as you find tight areas",yt:[{l:"Full body mobility flow",u:"https://www.youtube.com/results?search_query=full+body+mobility+flow+10+minutes"}]},
+        {n:"Foam rolling",d:"10 min — IT band, thoracic spine, calves, lats",p:"Add targeted areas after hard weeks",yt:[{l:"Foam rolling routine",u:"https://www.youtube.com/results?search_query=foam+rolling+full+body+routine"}]},
+        {n:"Optional light footwork shadow",d:"20 min badminton shadow only — no racket, very low intensity",p:"Skip entirely if fatigued",yt:[]},
       ]},
     ]
   },
   {
     short:"Sun", label:"Sunday", icon:"💤", type:"Full rest",
-    badge:"badge-rest", badgeLabel:"Rest day",
-    duration:"Off",
-    segs:[{l:"Rest",m:60,c:"#222"}],
+    badge:"badge-rest", badgeLabel:"Rest day", duration:"Off",
+    segs:[{l:"Rest",m:60,c:"#1a1a1a"}],
     warmup:"No training today.",
     cooldown:"No training today.",
     sections:[
       {title:"Recovery & preparation", exs:[
-        {n:"Full rest day", d:"Sleep 7–9 hours. No structured exercise. This is where adaptation happens.", p:"Weekly consistency matters far more than any single session."},
-        {n:"Meal prep & hydration", d:"Prepare meals for the week ahead. Aim for 3–4 litres of water today.", p:"Prioritise protein at every meal."},
-        {n:"Weekly reflection", d:"What improved this week? What needs work? Optional: 10 min mindfulness or journalling.", p:"Track one metric per week — pull-up reps, squat weight, or sprint time."},
+        {n:"Full rest day",d:"Sleep 7–9 hours. No structured exercise. This is where adaptation happens.",p:"Weekly consistency matters far more than any single session.",yt:[]},
+        {n:"Meal prep & hydration",d:"Prepare meals for the week. Aim for 3–4 litres of water today.",p:"Prioritise protein at every meal.",yt:[]},
+        {n:"Weekly reflection",d:"What improved? What needs work? Optional: 10 min mindfulness or journalling.",p:"Track one metric per week — pull-up reps, squat weight, or sprint time.",yt:[]},
       ]},
     ]
   }
 ];
 
 const progressionData = [
-  {phase:"Weeks 1–2 — Foundation", text:"Establish movement patterns. Prioritise form over load. Pull-ups: 4×8 controlled. Push-ups: 4×15. All lifts at 70% 1RM. Core holds: 20–30 sec. Footwork: focus on technique, not speed. Log every session."},
-  {phase:"Weeks 3–4 — Volume build", text:"Add 1 extra set to major compounds. Increase reps by 2–3 where form holds. Pull-ups: 4×10. Begin chest-to-bar attempts. Core holds extend to 40 sec. Badminton intensity increases — longer sets, faster feeds."},
-  {phase:"Weeks 5–6 — Intensity spike", text:"Explosive pull-ups and first banded muscle-up attempts. Squat and deadlift increase 5–10 kg. Add weighted dips (+5 kg). HIIT: 40 sec on / 20 sec off. Hanging leg raises: full straight leg, not bent. Footwork: cut rest by 10 sec."},
-  {phase:"Weeks 7–8 — Peak & deload", text:"Attempt 1–2 unassisted muscle-ups. Test new 5-rep maxes on squat, deadlift, bench. HIIT at maximum effort. Footwork: reduce all rest by 30%. In week 8: drop volume by 20% across all sessions (deload). Record and celebrate measurable gains."},
+  {phase:"Weeks 1–2 — Foundation",text:"Establish movement patterns. Prioritise form over load. Pull-ups: 4×8 controlled. Push-ups: 4×15. All lifts at 70% 1RM. Core holds: 20–30 sec. Footwork: technique, not speed. Log every session."},
+  {phase:"Weeks 3–4 — Volume build",text:"Add 1 extra set to major compounds. Increase reps by 2–3 where form holds. Pull-ups: 4×10. Begin chest-to-bar attempts. Core holds extend to 40 sec. Badminton: longer sets, faster feeds."},
+  {phase:"Weeks 5–6 — Intensity spike",text:"Explosive pull-ups and first banded muscle-up attempts. Squat and deadlift +5–10 kg. Weighted dips (+5 kg). HIIT: 40 sec on / 20 sec off. Hanging leg raises: full straight leg. Footwork: cut rest by 10 sec."},
+  {phase:"Weeks 7–8 — Peak & deload",text:"Attempt 1–2 unassisted muscle-ups. Test new 5-rep maxes on squat, deadlift, bench. HIIT at max effort. Footwork: reduce rest by 30%. Week 8: drop volume 20% (deload). Record and celebrate measurable gains."},
 ];
 
 const nutritionData = [
-  {title:"Protein target", val:"1.8–2.2 g per kg bodyweight daily. Eggs, chicken, fish, Greek yoghurt, cottage cheese, legumes."},
-  {title:"Calorie deficit", val:"200–400 kcal below maintenance. Avoid steep deficits — they impair muscle gain and slow recovery."},
-  {title:"Carb timing", val:"Higher carbs before and after training. Reduce on rest days. Oats, rice, sweet potato are ideal."},
-  {title:"Dietary fats", val:"0.8–1 g per kg bodyweight. Avocado, olive oil, nuts, fatty fish. Essential for hormones and recovery."},
-  {title:"Hydration", val:"3–4 litres per day. Add electrolytes after badminton sessions. Dehydration tanks performance fast."},
-  {title:"Abs visibility", val:"Abs show at ~12–15% body fat for most men. Consistent diet — not crash dieting — is the driver, not ab exercises alone."},
-  {title:"Pre-workout meal", val:"1–2 hrs before: complex carbs + protein. Oats + protein powder, or rice + chicken. Avoid heavy fats close to training."},
-  {title:"Post-workout window", val:"Within 60 min: 30–50 g protein + fast carbs. Protein shake + banana, or Greek yoghurt + berries."},
+  {title:"Protein target",val:"1.8–2.2 g per kg bodyweight daily. Eggs, chicken, fish, Greek yoghurt, cottage cheese, legumes."},
+  {title:"Calorie deficit",val:"200–400 kcal below maintenance. Avoid steep deficits — they impair muscle gain and slow recovery."},
+  {title:"Carb timing",val:"Higher carbs before and after training. Reduce on rest days. Oats, rice, sweet potato are ideal."},
+  {title:"Dietary fats",val:"0.8–1 g per kg bodyweight. Avocado, olive oil, nuts, fatty fish. Essential for hormones and recovery."},
+  {title:"Hydration",val:"3–4 litres per day. Add electrolytes after badminton sessions. Dehydration tanks performance fast."},
+  {title:"Abs visibility",val:"Abs show at ~12–15% body fat for most men. Consistent diet is the driver — not ab exercises alone."},
+  {title:"Pre-workout meal",val:"1–2 hrs before: complex carbs + protein. Oats + protein powder, or rice + chicken."},
+  {title:"Post-workout window",val:"Within 60 min: 30–50 g protein + fast carbs. Protein shake + banana, or Greek yoghurt + berries."},
 ];
 
-let selectedDay = 0;
+/* ─── STORAGE ─── */
+function getLog(){try{return JSON.parse(localStorage.getItem('wklog')||'[]');}catch(e){return[];}}
+function setLog(l){try{localStorage.setItem('wklog',JSON.stringify(l));}catch(e){}}
+function getNotes(k){try{return localStorage.getItem('wknote_'+k)||'';}catch(e){return '';}}
+function setNotes(k,v){try{localStorage.setItem('wknote_'+k,v);}catch(e){}}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function isDone(idx){const t=todayStr();return getLog().some(e=>e.date===t&&e.dayIdx===idx);}
 
-function renderStrip() {
-  document.getElementById('weekStrip').innerHTML = days.map((d,i)=>`
-    <button class="day-btn ${i===selectedDay?'active':''}" onclick="selectDay(${i})">
+function toggleDone(idx){
+  const t=todayStr(); let log=getLog();
+  const i=log.findIndex(e=>e.date===t&&e.dayIdx===idx);
+  if(i>=0){log.splice(i,1);}
+  else{
+    const noteEl=document.getElementById('notesArea');
+    const notes=noteEl?noteEl.value:(getNotes(t+'_'+idx));
+    if(notes) setNotes(t+'_'+idx,notes);
+    log.unshift({date:t,dayIdx:idx,label:days[idx].label,notes:notes.slice(0,80)});
+  }
+  setLog(log);
+}
+
+function getStreak(){
+  const log=getLog(); if(!log.length)return 0;
+  const dates=[...new Set(log.map(e=>e.date))].sort().reverse();
+  const today=new Date(todayStr()); let streak=0;
+  for(let i=0;i<dates.length;i++){
+    const diff=Math.round((today-new Date(dates[i]))/(864e5));
+    if(diff===i||diff===i+1)streak++; else break;
+  }
+  return streak;
+}
+function getTotalSessions(){return getLog().length;}
+function getThisWeekSessions(){
+  const log=getLog(); const today=new Date(todayStr());
+  const mon=new Date(today); mon.setDate(today.getDate()-((today.getDay()+6)%7));
+  return log.filter(e=>new Date(e.date)>=mon).length;
+}
+
+/* ─── STREAK BAR ─── */
+let selectedDay=0;
+function renderStreakBar(){
+  document.getElementById('streakBar').innerHTML=`
+    <div class="streak-item"><div class="streak-num">${getStreak()}</div><div class="streak-lbl">day<br>streak</div></div>
+    <div class="streak-sep"></div>
+    <div class="streak-item"><div class="streak-num">${getThisWeekSessions()}</div><div class="streak-lbl">this<br>week</div></div>
+    <div class="streak-sep"></div>
+    <div class="streak-item"><div class="streak-num">${getTotalSessions()}</div><div class="streak-lbl">total<br>sessions</div></div>
+  `;
+}
+
+/* ─── WEEK STRIP ─── */
+function renderStrip(){
+  document.getElementById('weekStrip').innerHTML=days.map((d,i)=>`
+    <button class="day-btn ${i===selectedDay?'active':''} ${isDone(i)?'done':''}" onclick="selectDay(${i})">
+      <div class="done-dot"></div>
       <div class="day-short">${d.short}</div>
       <span class="day-icon">${d.icon}</span>
       <div class="day-type">${d.type.split(' ').slice(0,2).join(' ')}</div>
-    </button>
-  `).join('');
+    </button>`).join('');
 }
 
-function renderWorkout() {
-  const d = days[selectedDay];
-  const total = d.segs.reduce((a,s)=>a+s.m,0);
-  let h = `
+/* ─── WORKOUT ─── */
+function renderWorkout(){
+  const d=days[selectedDay]; const total=d.segs.reduce((a,s)=>a+s.m,0);
+  const done=isDone(selectedDay); const noteKey=todayStr()+'_'+selectedDay;
+  const savedNote=getNotes(noteKey);
+  const ytSVG=`<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>`;
+  let h=`
     <div class="day-header">
       <div class="day-title">${d.label}</div>
       <span class="day-badge ${d.badge}">${d.badgeLabel}</span>
     </div>
+    <button class="done-btn ${done?'is-done':''}" onclick="markDone()">
+      <span class="done-chk">${done?'✓':''}</span>
+      ${done?"Session logged for today \u2014 tap to undo":"Mark today's session as done"}
+    </button>
     <div class="dur-wrap">
-      <div class="dur-bar">
-        ${d.segs.map(s=>`<div class="dur-seg" style="width:${Math.round(s.m/total*100)}%;background:${s.c};border-radius:3px;"></div>`).join('')}
-      </div>
-      <div class="dur-legend">
-        ${d.segs.map(s=>`<span class="dur-label"><span class="dur-dot" style="background:${s.c};"></span>${s.l} ${s.m} min</span>`).join('')}
-      </div>
+      <div class="dur-bar">${d.segs.map(s=>`<div class="dur-seg" style="width:${Math.round(s.m/total*100)}%;background:${s.c};border-radius:3px;"></div>`).join('')}</div>
+      <div class="dur-legend">${d.segs.map(s=>`<span class="dur-label"><span class="dur-dot" style="background:${s.c};"></span>${s.l} ${s.m} min</span>`).join('')}</div>
     </div>
-    <div class="wc-block"><strong>Warm-up:</strong> ${d.warmup}</div>
-  `;
+    <div class="wc-block"><strong>Warm-up:</strong> ${d.warmup}</div>`;
   d.sections.forEach(sec=>{
-    h += `<div class="sec-label">${sec.title}</div>`;
+    h+=`<div class="sec-label">${sec.title}</div>`;
     sec.exs.forEach((ex,i)=>{
-      h += `<div class="ex-row">
-        <div class="ex-n">${i+1}</div>
-        <div>
-          <div class="ex-name">${ex.n}</div>
-          <div class="ex-detail">${ex.d}</div>
-          ${ex.p?`<div class="ex-prog">→ ${ex.p}</div>`:''}
-        </div>
-      </div>`;
+      const links=ex.yt&&ex.yt.length?`<div class="ex-links">${ex.yt.map(y=>`<a class="yt-link" href="${y.u}" target="_blank" rel="noopener">${ytSVG}${y.l}</a>`).join('')}</div>`:'';
+      h+=`<div class="ex-row"><div class="ex-n">${i+1}</div><div class="ex-body">
+        <div class="ex-name">${ex.n}</div>
+        <div class="ex-detail">${ex.d}</div>
+        ${ex.p?`<div class="ex-prog">\u2192 ${ex.p}</div>`:''}
+        ${links}
+      </div></div>`;
     });
   });
-  h += `<div class="sec-label" style="margin-top:1.4rem;">Cool-down</div>
-    <div class="wc-block"><strong>Cool-down:</strong> ${ex => ex}${d.cooldown}</div>`;
-  document.getElementById('workoutDetail').innerHTML = h.replace('${ex => ex}','');
+  h+=`<div class="sec-label" style="margin-top:1.2rem;">Cool-down</div>
+    <div class="wc-block"><strong>Cool-down:</strong> ${d.cooldown}</div>
+    <div class="sec-label" style="margin-top:1.2rem;">Session notes</div>
+    <textarea class="notes-area" id="notesArea" placeholder="Note your weights, reps, how it felt...">${savedNote}</textarea>
+    <div style="display:flex;align-items:center;margin-top:6px;">
+      <button class="notes-save" onclick="saveNotes()">Save notes</button>
+      <span class="notes-saved-msg" id="notesSavedMsg">Saved!</span>
+    </div>`;
+  document.getElementById('workoutDetail').innerHTML=h;
 }
 
-function renderProgression() {
-  document.getElementById('progDetail').innerHTML = progressionData.map(p=>`
-    <div class="prog-card">
-      <div class="prog-phase">${p.phase}</div>
-      <div class="prog-text">${p.text}</div>
+function markDone(){
+  const noteEl=document.getElementById('notesArea');
+  if(noteEl&&noteEl.value) setNotes(todayStr()+'_'+selectedDay, noteEl.value);
+  toggleDone(selectedDay);
+  renderStrip(); renderStreakBar(); renderWorkout();
+}
+
+function saveNotes(){
+  const el=document.getElementById('notesArea'); if(!el)return;
+  setNotes(todayStr()+'_'+selectedDay, el.value);
+  const msg=document.getElementById('notesSavedMsg');
+  if(msg){msg.style.opacity='1'; setTimeout(()=>msg.style.opacity='0',1800);}
+}
+
+/* ─── CALENDAR ─── */
+let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
+
+function renderCalendar(){
+  const log=getLog(); const today=todayStr();
+  const doneMap={}; log.forEach(e=>{if(!doneMap[e.date])doneMap[e.date]=[];doneMap[e.date].push(e);});
+  const firstDow=new Date(calYear,calMonth,1).getDay();
+  const dim=new Date(calYear,calMonth+1,0).getDate();
+  const offset=(firstDow+6)%7;
+  const monthName=new Date(calYear,calMonth,1).toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+  const monthKey=`${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const monthLogs=log.filter(e=>e.date.startsWith(monthKey));
+
+  let h=`
+    <div class="cal-stats">
+      <div class="cal-stat"><div class="cal-stat-n">${getStreak()}</div><div class="cal-stat-l">Day streak</div></div>
+      <div class="cal-stat"><div class="cal-stat-n">${getThisWeekSessions()}</div><div class="cal-stat-l">This week</div></div>
+      <div class="cal-stat"><div class="cal-stat-n">${getTotalSessions()}</div><div class="cal-stat-l">Total done</div></div>
     </div>
-  `).join('');
-}
-
-function renderNutrition() {
-  document.getElementById('nutDetail').innerHTML = `
-    <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.7;">Evidence-based guidelines for fat loss, muscle retention, and abs visibility. Adjust quantities to your bodyweight.</p>
-    <div class="nut-grid">
-      ${nutritionData.map(n=>`
-        <div class="nut-card">
-          <div class="nut-title">${n.title}</div>
-          <div class="nut-val">${n.val}</div>
-        </div>
-      `).join('')}
+    <div class="cal-header">
+      <button class="cal-nav" onclick="calNav(-1)">&#8592;</button>
+      <div class="cal-month-lbl">${monthName}</div>
+      <button class="cal-nav" onclick="calNav(1)">&#8594;</button>
     </div>
-    <div class="info-box" style="margin-top:1.25rem;">
-      <strong>Key principle:</strong> You cannot out-train a poor diet for abs visibility. The training builds the muscle; the calorie deficit reveals it. Both have to run simultaneously, consistently, over 8–16 weeks.
-    </div>
-  `;
+    <div class="cal-grid">
+      ${['Mo','Tu','We','Th','Fr','Sa','Su'].map(d=>`<div class="cal-dow">${d}</div>`).join('')}
+      ${Array(offset).fill('<div class="cal-day empty"></div>').join('')}`;
+  for(let day=1;day<=dim;day++){
+    const ds=`${monthKey}-${String(day).padStart(2,'0')}`;
+    const isToday=ds===today; const completed=!!doneMap[ds];
+    const dow=(offset+day-1)%7; const isWorkDay=dow<5;
+    h+=`<div class="cal-day ${isToday?'today':''} ${completed?'completed':''} ${isWorkDay&&!completed?'has-workout':''}" title="${completed?doneMap[ds].map(e=>e.label).join(', '):ds}">
+      <div class="cal-day-num">${day}</div><div class="cal-day-dot"></div>
+    </div>`;
+  }
+  h+=`</div>
+    <div class="cal-legend">
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:#0d1a05;border-color:#2a4a0a;"></span>Completed</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--surface);border-color:#444;"></span>Scheduled</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--surface);border-color:var(--border);"></span>Rest day</span>
+    </div>`;
+  if(monthLogs.length){
+    h+=`<div class="cal-log-title">Sessions this month</div>
+      ${monthLogs.map(e=>`<div class="log-entry">
+        <span class="log-date">${new Date(e.date+'T12:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</span>
+        <span class="log-day">${e.label}</span>
+        ${e.notes?`<span class="log-note">"${e.notes.slice(0,40)}${e.notes.length>40?'\u2026':''}"</span>`:''}
+        <button class="log-del" onclick="deleteLog('${e.date}',${e.dayIdx})" title="Remove">\u2715</button>
+      </div>`).join('')}`;
+  } else {
+    h+=`<p class="empty-cal">No sessions logged this month yet. Mark workouts as done in the Workout tab.</p>`;
+  }
+  document.getElementById('calDetail').innerHTML=h;
 }
 
-function selectDay(i) {
-  selectedDay = i;
-  renderStrip();
-  const activePanel = document.querySelector('.panel.active').id.replace('panel-','');
-  if(activePanel==='workout') renderWorkout();
+function calNav(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;} if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
 }
 
-function switchTab(tab, btn) {
+function deleteLog(date,dayIdx){
+  let log=getLog().filter(e=>!(e.date===date&&e.dayIdx===dayIdx));
+  setLog(log); renderStreakBar(); renderStrip(); renderCalendar();
+}
+
+/* ─── PROGRESSION & NUTRITION ─── */
+function renderProgression(){
+  document.getElementById('progDetail').innerHTML=progressionData.map(p=>`
+    <div class="prog-card"><div class="prog-phase">${p.phase}</div><div class="prog-text">${p.text}</div></div>`).join('');
+}
+function renderNutrition(){
+  document.getElementById('nutDetail').innerHTML=`
+    <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.7;">Evidence-based guidelines for fat loss, muscle retention, and abs visibility.</p>
+    <div class="nut-grid">${nutritionData.map(n=>`<div class="nut-card"><div class="nut-title">${n.title}</div><div class="nut-val">${n.val}</div></div>`).join('')}</div>
+    <div class="info-box" style="margin-top:1.25rem;"><strong>Key principle:</strong> You cannot out-train a poor diet for abs visibility. The training builds the muscle; the calorie deficit reveals it. Both must run simultaneously over 8–16 weeks.</div>`;
+}
+
+/* ─── ROUTING ─── */
+function selectDay(i){
+  selectedDay=i; renderStrip();
+  const active=document.querySelector('.panel.active').id.replace('panel-','');
+  if(active==='workout')renderWorkout();
+}
+function switchTab(tab,btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panel-'+tab).classList.add('active');
-  if(tab==='workout') renderWorkout();
-  else if(tab==='progression') renderProgression();
-  else if(tab==='nutrition') renderNutrition();
+  btn.classList.add('active'); document.getElementById('panel-'+tab).classList.add('active');
+  if(tab==='workout')renderWorkout();
+  else if(tab==='calendar')renderCalendar();
+  else if(tab==='progression')renderProgression();
+  else if(tab==='nutrition')renderNutrition();
 }
 
-renderStrip();
-renderWorkout();
+/* ─── INIT ─── */
+renderStreakBar(); renderStrip(); renderWorkout();
 </script>
 </body>
 </html>
